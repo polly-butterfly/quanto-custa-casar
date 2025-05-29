@@ -1,0 +1,31 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main  # ou a branch que você deseja monitorar
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # ou a versão que você deseja usar
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        run: |
+          # Aqui você pode adicionar o comando para implantar seu site
+          # Por exemplo, se você estiver usando o Netlify, você pode usar o CLI do Netlify
+          # netlify deploy --prod --dir=build
