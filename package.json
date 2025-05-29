@@ -1,7 +1,6 @@
 {
   "name": "quanto-custa-casar",
   "version": "1.0.0",
-  "homepage": "https://polly-butterfly.github.io/quanto-custa-casar",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
