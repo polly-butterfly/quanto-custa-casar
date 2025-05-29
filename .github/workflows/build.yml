@@ -1,31 +1,31 @@
-name: Build and Deploy
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # ou a branch que você deseja monitorar
+      - main  # ou "master", dependendo do seu repositório
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout do código
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'  # ou a versão que você deseja usar
+          node-version: 20
 
-      - name: Install dependencies
+      - name: Instalar dependências
         run: npm install
 
-      - name: Build
+      - name: Fazer build
         run: npm run build
 
-      - name: Deploy
-        run: |
-          # Aqui você pode adicionar o comando para implantar seu site
-          # Por exemplo, se você estiver usando o Netlify, você pode usar o CLI do Netlify
-          # netlify deploy --prod --dir=build
+      - name: Deploy no GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
